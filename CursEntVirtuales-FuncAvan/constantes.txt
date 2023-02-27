@@ -1,0 +1,27 @@
+DIFERENCIA CONST VS DEFINE
+
+Const:
+
+    Funciona dentro y fuera de la definición de una clase
+    Define las constantes en tiempo de compilación
+    No podemos usarlos dentro de bloques de código
+    Solo acepta tipos de dato escalares
+    Siempre es case sensitive
+
+Define:
+
+    Solo funciona fuera de la definición de una clase
+    Define las constantes en tiempo de ejecución
+    Si podemos usarlos dentro de bloques de código
+    Acepta cualquier expresión
+    Puedes definir case insensitive pasando “true” en el tercer argumento. (Esto solo para versiones anteriores a PHP 8, ya que a partir de la version 8 el valor “true” no es valido)
+
+CONSTANTES MÁGICAS
+
+    __LINE__: Nos indica en que línea está actualmente el script.
+
+    __FILE__: Nos indica cual es el archivo que se está ejecutando actualmente.
+
+    __DIR__: Nos brinda la dirección del archivo del cual es llamada.
+
+    ClassName::class: Nos brinda el nombre completo de una clase.

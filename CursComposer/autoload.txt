@@ -1,0 +1,10 @@
+->  autoload.php es el archivo que contiene ya todas las clases y archivos precargados de tal forma que podemos acceder a cualquiera de sus clases/funciones usando
+    sus nombres de espacios, etc.
+
+->  El autoload contiene:
+    
+    *->Files → Permite cargar una serie de archivos con helpers. Aquí conficuramos archivos ayudantes (helpers).(configuramos archivos ayudantes-archivos con funciones)
+    *->Classmap → Nos deja cargar carpetas de una manera directa carpetas que van a tener dentro de si diferentes clases.
+    *->Psr-0 → Ya que es más antiguo, tenemos que poner todas las rutas de las carpetas.
+    *->Psr-4 → Al hacer énfasis a la carpeta principal, este entiende todas las rutas dentro de sí. (remonedado)
+

@@ -1,0 +1,11 @@
+{
+    "name": "agustin/curscomposer",
+    "autoload": {
+        "files": [
+            "src/helpers.php"
+        ],
+        "psr-4": {
+            "Src\\": "src/"
+        }
+    }
+}

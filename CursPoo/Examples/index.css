@@ -1,0 +1,15 @@
+body{
+    background-color: rgb(19, 18, 18);
+}
+
+div{
+    display: block;
+    text-align: center;
+    margin: auto;
+}
+img{
+    margin-top: 115px;
+    margin-inline: 25px;
+    width: 800px;
+    height: 600px;
+}

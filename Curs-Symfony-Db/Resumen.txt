@@ -1,0 +1,76 @@
+Como siempre lo primero que debemos hacer para iniciar un proyecto con symfony es ejecutar el comando "symfony new "nombre del archivo"",luego de que se crea
+el esqueleto de carpetas ejecutarmos desde la terminal el comando "php bin/console" para ver todos los comandos disponibles, luego necesitaremos de composer
+para asi ejecutar el comando "composer require symfony/maker-bundle --dev", esta instalacion traera con nosotros  un monton de nuevos comandos que vamos a
+necesitar a lo largo de nuestros proyectos,para conocerlos es necesario ejecutar nuevamente el comando "php bin/console".
+
+Luego ejecutaremos el comando "composer require symfony/orm-pack", este es el comando que nos permitira trabajar con base de datos desde nuestro proyecto.
+lo siguiente a la ejecucion del comando anterior es definir("configurar") nuestra conexion a db mediante el archivo ".env". 
+Una vez definida la conexion para crearla ejecutamos el comando "php bin/console doctrine:database:create".
+
+Para seguir ejecutamos el comando "php bin/console make:entity" (recordad que las entidades seran convertidas en nuestras tablas de la base de datos, -)
+(- en esta definiremos todas sus propiedades). Estas tablas NO existen aun en mi base de datos. para eso necesito en primer lugar crear la migracion,
+para ello ejecuto el comando "php bin/console make:migration". Este arhcivo de migracion lo que contiene es el script de php necesario para crear las tablas
+a traves de los comandos SQL, este se crea a partir de nuestra previa configuracion de las entidades. Por esto decimos que la migracion es la estructura 
+inicial de una tabla. Aun con lo anterior mencionado todavia no existen dichas tablas en nuestra DB para ello ejecuto el comando 
+"php bin/console doctrine:migrations:migrate", una vez ejecutado este comando ya podremos ver reflejadas nuestras tablas en la base de datos.
+
+A traves del comando "php bin/console doctrine:migrations:list",podemos conocer el nombre de la version(entre otros datos) y una vez que conocemos 
+el nombre de esa version darla de baja con el siguiente comando "php bin/console doctrine:migrations:execute "nombre de la version" --down".
+Ahora que ya dimos de baja una version antigua para levanar una nueva o recuperar esa que dimos de baja ejecutamos el comando 
+"php bin/console doctrine:migrations:migrate". Este metodo "down" no es que sale de la nada sino que lo tenemos definido en el archivo "Version"
+en la carpeta migrations. Cuando en el futuro vayamos generando cambios en nuestras entidades deberemos ir migrando los mismos. Y al momentos de cargarlos
+en nuestra base de datos otra vez ejecutaremos el comando correspondiente, este lo que hara es actualizar nuestra base de datos con el script SQL presente
+en nuestro ultimo arhcivo php de version.
+
+->"composer require orm-fixtures --dev" (crea la carpeta "DataFixtures" con el archivo "AppFixtures.php" dentro de la carpeta "src")*Todavia sin explicacion*
+->"php bin/console make:fixtures" *Todavia sin explicacion*
+->"php bin/console doctrine:fixtures:load" *Permite cargar datos a nuestras tablas de manera directa implementando los metodos presentes en las entidades*,
+*Utiliza el archivo "AppFixtures.php" dentro de la carpeta "DataFixtures" para hacerlo*
+
+->"compose require zenstruck/foundry --dev" *Nos permite la utilizacion del comando desarrollado a continuacion*
+->"php bin/console make:factory" *Crea la carpeta Factory con los archivos factory basados en las entidades que determine al momento de generar la "fabrica"*
+*estas "fabricas" son moldes para la creacion de datos falsos.Estos moldes seran utilizados en la clase "AppFixtures" dentro de la carpeta "DataFixtures"*
+
+->"composer require symfony/twig-pack" Nos permite manejar plantillas de tipo twig, es decir, nos permite trabajar con "Vistas".
+Para trabajar con nuestra estructura front lo primero que deberiamos hacer es ejecutar el comando "composer require symfony/webpack-encore-bundle"-
+-crea las carpeta assets desde donde voy a manejar el css e importar bootstrap. Para trabajar con el front y en su defecto para poder usar bootstrap es-
+-necesario ejecutar el comando "npm install bootstrap --save-dev"
+
+->"composer require symfony/debug-pack" Nos va a permitir tener un mejor control y manejo de errores para asi evitar o de ser necesario tratar los bugs o 
+fallos
+
+->"php bin/console make:controller" Creamos nuestro/s controlador/es.
+
+->"npm install" Lo mejor seria ejecutar primero este comando y luego el comando para la instalacion de bootstrap en el front.Una vez finalizamos con ambas
+instalaciones debemos de ejecutar el comando "npm run dev", este lo que hace es compilar el front y generar la carpeta build la cual cuenta entre muchas cosas
+con nuestro entrypoint.
+
+Revisar Tambien comentarios hechos en el codigo,sobre todo en los controladores.
+
+Es necesario prestar atencion a que cuando trabjamos en nuestro con controlador con rutas que van a requerir de un id para determinar la vista, va a sera
+necesario que en el redireccionamiento que va a tener cada card o cada elemento redirecconable de nuestro esqueleto mantener la siguiente sintaxis:
+"<a href="{{ path('NombreDeLaRuta', { id: NuestraEntidad.id }) }}" class="x"> {{ NuestraEntidad.propiedadRandom }} </a>", lo que vaya dentro de las etiquetas
+de tipo "ancla" o "<a>" es lo que sera redireccionamiento al path marcado.
+
+Es muy recomendable refacorizar las vistas asi no repetimos codigo y ahorramos espacio, es importante recordar que siempre las vistas principales van a 
+extender de mi vista "base.html.twig", por eso es necesario definir en ella el esqueleto principal que va a seguir mi pagina.
+
+Desde los archivos presentes en mi repositorio puedo definir nuevos metodos y middlewares que me serviran para obtimizar mis consultas y lograr renderizar
+aquello que quiero pero para lo cual no exixtia una funcion predefinida. En algunas ocaciones va a ser necesario que realizemos consultas sql a resultados 
+coincidentes entre tablas, por ello voy a resumir los 3 metodos para esto:
+
+->"INNER JOIN" keyword selecciona todas las filas de ambas tablas siempre que haya una coincidencia entre las columnas. Si hay registros en la tabla "Product" 
+que no tienen coincidencias en "Comments", ¡estos productos no se mostrarán!
+
+->"LEFT JOIN" keyword retorna todos los registros presentes en la primera tabla("tabla de la izquierda") de nuestro codigo SQL y (si los hay) todo aquellos 
+registros que coinciden con la segunda tabla o tabla de la derecha. ¡los registros de la tabla izquierda se mostraran igual exista o no coincidencia con la tabla
+derecha!
+
+->"RIGHT JOIN" keyword retorna todos los registros presentes en la primera tabla("tabla de la derecha") de nuestro codigo SQL y (si los hay) todo aquellos 
+registros que coinciden con la segunda tabla o tabla de la izquierda. ¡los registros de la tabla derecha se mostraran igual exista o no coincidencia con la tabla
+izquierda!
+
+Siguinedo con nuestra idea de obtimizar mi aplicación llegamos finalmente a la idea de ejecutar las consultas desde nuestro/s controlador/controladores y no
+desde la/s vista/vistas.
+
+La visa "tag.html.twig" no esta en uso.

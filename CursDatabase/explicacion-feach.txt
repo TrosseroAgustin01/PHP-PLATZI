@@ -1,0 +1,3 @@
+FetchAll: Retorna las filas resultantes de la consulta, las columnas de cada fila se presentan con valores duplicados,
+esto es porqué el nombre de la columna lo informa de forma numérica y también de forma asociativa (nombre de la columna en la tabla).
+-> este tema lo tratamos en la carpeta bindValues;

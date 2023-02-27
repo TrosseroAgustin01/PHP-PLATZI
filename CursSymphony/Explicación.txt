@@ -1,0 +1,84 @@
+Haz cursos
+Programa
+Lee el código
+
+1° Peticion,
+2° Procesamiento
+3° Respuesta
+
+“Ruta + controlador= página web”
+
+Entity
+
+Representación en PHP de una tabla que tenemos en BD.
+Se crea con php bin/console make:entity
+Se guarda en src/Entity
+
+Migration
+
+Estructura inicial que se convertirá en una tabla de la BD.
+Permite trabajar con un sistema de versiones.
+Se crea con php bin/console make:migration
+Se guarda en migrations/
+Subir up una versión significa crear la tabla y bajar down borrarla.
+Para ejecutar las migraciones se usa php bin/console doctrine:migrations:migrate
+
+Repository
+
+Quien contiene todos los métodos de consultas.
+Se encuentra en src/Repository
+
+->comandos para crear una entity
+php bin/console make:entity
+
+->comandos para realizar las migraciones
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
+
+-> comandos para crear un formulario
+composer require symfony/form
+php bin/console make:form
+
+Validator
+comandos para crear una validator
+composer require symfony/validator
+
+Luego en la entidad:
+
+use Symfony\Component\Validator\Constraints as Assert;
+...
+#[Assert\NotBlank]
+
+En el controlador:
+
+...
+if( $form->isSubmitted() && $form->isValid() ) {
+...
+
+En la entidad, podemos traducir el mensaje:
+
+#[Assert\NotBlank(message:'El texto es obligatorio')]
+
+Front-end
+
+composer require symfony/webpack-encore-bundle
+npm install
+npm install bootstrap --save-dev
+
+En assets/styles/app.css
+
+@import 'bootstrap';
+
+Luego en la terminal:
+
+npm run dev
+
+Diseño web
+
+composer require twig/markdown-extra
+composer require league/commonmark
+
+En config/packages/twig.yaml:
+
+form_themes: ['bootstrap_5_layout.html.twig']
+

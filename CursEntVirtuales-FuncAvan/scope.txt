@@ -1,0 +1,24 @@
+El scope (o ambito de las variables) es el contexto en donde una variable es definida. Usualmente, la mayor del tiempo una variable tiene un ambito Global/simple, 
+es decir, está disponible en todo el archivo e incluso en otros archivos donde se haga un require
+<h5>Ambito local</h5>
+
+Cuando empezamos a usar funciones el ambito de cualquier variable definida dentro de la funcion pasa a ser un ambito local
+
+En otras palabras, esa variable solo existe dentro de la funcion
+<h5>La palabra reservada global</h5>
+
+Cuando queremos que una variable externa exista dentro de una funcion sin necesidad de pasarla como un parametro podemos usar la palabra reservada “global”.
+
+$outside_variable = "Esto es una variable global";
+function my_function() {
+    global $outside_variable;
+    echo $GLOBALS["outside_variable"];
+}
+
+Es posible ver todas las variables globales disponibles y creadas usando la variable $GLOBALS, y como este devuelve un array de las variables disponibles puedes acceder a estas
+
+function my_function() {
+    global $outside_variable;
+    echo $outside_variable;
+    echo $GLOBALS["outside_variable"];
+}

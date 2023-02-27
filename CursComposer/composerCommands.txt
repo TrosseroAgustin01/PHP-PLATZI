@@ -1,0 +1,29 @@
+//Si tienes el paquete agregado a tu composer.json
+composer install
+
+//si no lo tienes configurado en tu json
+composer require phpunit/phpunit
+
+//Si deseas removerlo
+composer remove phpunit/phpunit
+
+//para agregar composer a tu proyecto
+composer dump
+
+
+Comandos principales de Composer
+
+El primer paso de todo proyecto es crear el archivo composer.json, esto es lo correcto. Si escribimos la palabra composer en la bash nos mostrará una lista de comando que podemos utilizar.
+
+    Install → Si tienes el paquete agegado a tu composer.json
+    Require → Si no tienes configurado en JSON, utilizar este para añadir las dependencias que requerimos.
+    Remove → Si ya no requieres de algún componente, con este comando los removemos del proyecto (las desinstala todo).
+    Self-update → Nos ayuda a actualizar a composer.
+    Update → Este comando se conenccta a internet para saber si existe alguna actualización.
+    Dump → Para agregar composer a nuestro proyecto.
+
+
+La diferencia entre self-update y update es:
+
+self-update: Actualiza a composer, al manejador de dependencias
+update: Actualiza las dependencias de nuestros proyectos

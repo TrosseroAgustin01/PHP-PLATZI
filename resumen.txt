@@ -1,0 +1,76 @@
+            -> COMANDOS <-
+
+Siempre que comenzemos un pryecto symfony,luego de determinar el tipo de pryecto que vamos a desarrollar, debemos ejecutar el comando 
+"composer require symfony/maker-bundle",este nos sirve para lo siguiente: Nos ayuda a crear comandos vacíos, controladores, clases de formularios, 
+pruebas y más para que podamos olvidarnos de escribir código repetitivo.Este paquete proporciona varios comandos bajo el espacio de nombres make:. 
+Listarlos todos ejecutando este comando:"php bin/console list make". Los nombres de los comandos se explican por sí mismos, 
+pero algunos de ellos incluyen argumentos y opciones opcionales. para conocerlas ejecutamos detras de cada comando --help.
+
+-php bin/console make:controller
+-php bin/console make:form
+-php bin/console make:
+
+Un comando que nos puede ayudar mucho es el comando "composer require symfony/twig-pack", Twig implementa un novedoso mecanismo de herencia de plantillas 
+y no tendrás que preocuparte por el peso que conlleva el interpretar todo ello, debido a que Twig cachea en auténticas clases PHP todo el contenido 
+de las mismas, para acelerar el rendimiento de nuestra aplicación.Las plantillas en Twig son muy fáciles de hacer y resultan muy intuitivas.
+
+El comando "composer require symfony/orm-pack" le permite a Symfony proporcionar todas las herramientas que necesitamos para usar bases de datos en nuestras
+aplicaciones gracias a Doctrine, el mejor conjunto de bibliotecas PHP para trabajar con bases de datos. Estas herramientas admiten bases de datos relacionales 
+como MySQL y PostgreSQL y también bases de datos NoSQL como MongoDB.La información de conexión de la base de datos se almacena como una variable de entorno 
+denominada DATABASE_URL. Para el desarrollo, podemos encontrar y personalizar esto dentro de .env: mi ejemplo:
+"DATABASE_URL="mysql://root:@localhost:3306/symfony_DB_course?serverVersion=10.4.27-MariaDB&charset=utf8mb4""
+
+Otro comando que usaremos mucho es "composer require symfony/form",El componente Formulario le permite crear, procesar y reutilizar formularios.
+El componente Formulario es una herramienta que nos ayuda a resolver el problema de permitir que los usuarios finales interactúen con los datos y modifiquen 
+los datos en nuestra aplicación. Y aunque tradicionalmente esto ha sido a través de formularios HTML, el componente se enfoca en procesar datos hacia y desde 
+el cliente y aplicación, ya sea que los datos provengan de una publicación de formulario normal o de una API.Luego
+
+-php bin/console make:form
+-php bin/console make:entity
+-php bin/console make:migration
+-php bin/console doctrine:migrations:migrate
+
+EL comando "composer require symfony/validator" provee el componente Validator,el cual, proporciona herramientas para validar valores siguiendo la 
+especificación JSR-303 Bean Validation.
+
+"composer require symfony/webpack-encore-bundle" Este comando crea el directorio "assets/", agrega un archivo "webpack.config.js "
+y agrega "node_modules/" a ".gitignore" . Lo que logramos al realizar esto y los siguientes comandos: *
+->npm install bootstrap --save-dev
+->npm install
+->npm run dev
+*es acceder a darle estilos y manipular lo que seria el front de nuestra aplicacion.
+
+                -> CONTOLADORES <-
+
+Un controlador es una función PHP que creas que lee información del objeto Solicitud y crea y devuelve un objeto Respuesta. 
+La respuesta podría ser una página HTML, JSON, XML, la descarga de un archivo, una redirección, un error 404 o cualquier otra cosa. 
+El controlador ejecuta cualquier lógica arbitraria que su aplicación necesite para representar el contenido de una página.
+El conlador es el "metodo x()" que definimos-ejecutamos dentro de la "clase Y {}"; 
+Generalmente definimos el metodo controlador con el mismo nombre que la clase controladora
+El metodo "Route" "use Symfony\Component\Routing\Annotation\Route" nos permite definir las rutas a donde 
+queremos que nos redirija el metodo que estamos definiendo
+El metodo "Request" "use Symfony\Component\HttpFoundation\Request" nos permite manipular un peticion sin.
+El metodo "Response" "use Symfony\Component\HttpFoundation\Response" nos permite definir una respuesta dentro del metodo,
+basandonos generalmente en lo que nos llega como request.
+La clase "AbstractController" "use Symfony\Bundle\FrameworkBundle\Controller\AbstractController", nos permite acceder a funciones tales como $this->render().
+El metodo "render" genera una plantilla y coloca ese contenido en un objeto de respuesta para nosotros: $this->render().
+
+Cuando estamos creando un formulario y queremos conocer todos los tipos de inputs para el formulario nos 
+fijamos en esta direccion "vendor\Symfony\Component\Form\Extension\Core\Type\"
+
+Orden para crear la database y conectarla a nuestro proyecto y luego migrar las tablas
+1° "php bin/console doctrine:database:create" esto crea la database y la conecta,siempre previo a esto debemos configurarla en ".env"
+2° "php bin/console make:migration" carga la carpeta y el archivo migration.
+3° "php bin/console doctrine:migrations:migrate" carga los comandos sql y genera las tablas y relaciones en nuestra DB.
+
+El método persist() sirve para indicarle a Doctrine que gestione el objeto. Al crear el objeto por primera vez, para registrarlo en DB, 
+es necesario hacer persist, pero no es necesario al hacer una modificación del objeto, ya que previamente se pudo haber hecho un $entityManager->find() 
+para encontrar el objeto, el cual ya está siendo gestionado por doctrine, y por eso solo es necesario hacer el flush después de hacer algún set al objeto. 
+El método flush sirve para volcar los cambios en la base de datos.
+
+Para realzar las validaciones es necesario requerir de composer la clase validator, para esto ejecutamos el comando "composer require symfony/validator",
+luego en el archivo de carpeta entity correspondiente al form que estamos trabajando, la llamamos "use symfony\Component\Validator\Constraints as Assert;"
+siguiendo, lo proximo que hacemos es definir estas validacions,esto se hace de la siguiente manera "#[Assert\"validadacion x"]" ej "#[Assert\NotBlank]" o
+"#[Assert\length(min:x max:y)]" o "#[Assert\NotNull]". Es necesario aclarar que cada validacion debe ser pasada en el input al cual quiere referirse.
+Recordar que al igual que cuando usamos rutas al difinir Assert es necesario usar "\" y NO "/" para acceder a sus metodos.
+Por ultimo aclarar que el "#[Assert\NotBlank]" incluye las validaciones de que no sea falso, no sea nulo, ni que este en blanco.

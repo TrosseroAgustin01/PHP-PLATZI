@@ -1,0 +1,9 @@
+Es una forma de que varias paginas web puedan funcionar al mismo tiempo en un mismo servidor. Los podemos definir por direcciones IP o por nombres de dominio.
+
+Cuando trabajamos con localhost se pueden configurar para que un nombre de dominio que escribamos en nuestro navegador apunte hacia alguna pégina web que esté sirviendo Apache desde nuestra computadora.
+
+Para configurar un virtual host tenemos que hacer dos cosas:
+
+    Decirle a Apache que exponga X pagina web en tal dominio.
+
+    Decirle al navegador que cuando escribamos X dominio redirija a la web que Apache esta exponiendo.

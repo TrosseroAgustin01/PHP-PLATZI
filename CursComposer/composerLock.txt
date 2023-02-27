@@ -1,0 +1,15 @@
+El archivo composer.lock no lo vamos a tocar ni editar, este nos sirve para trabajar con otras personas en nuestros proyectos, 
+ya que este archivo muestra la descripción exacta y el detalle de los componentes y paquetes.
+
+Este archivo lo crea y edita composer.
+
+Este archivo es necesario por que entre programadores no se comparte el archivo vendor, 
+pero gracias a este archivo nuestros compañeros podrán saber cuáles dependencias deben descargar.
+
+Si alguno viene de JavaScript literalmente está es la equivalencia:
+
+    Vector es igual a node_modules -> No se debe compartir ni subir a un repositorio dado que es muy pesado.
+
+    composer.json es equivalente a package.json -> Donde se define el proyecto y se listan las dependencias
+
+    composer.lock es equivalente a package-lock.json -> Donde se ve toda la documentación e información de las librerías y paquetes

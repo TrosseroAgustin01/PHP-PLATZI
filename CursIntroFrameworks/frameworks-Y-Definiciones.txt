@@ -1,0 +1,27 @@
+
+* Un proyecto de PHP , necesitamos crearlo con un framework
+* Un framework nos permite no volver a crear la rueda
+* Si hacemos todo desde cero, demoraríamos mucho tiempo, el framework, nos agiliza el trabajo, porque todo viene configurado como: conexiones,plantillas,etc. 
+* Sin descuidar la seguridad y rendimiento
+* Nos permite enfocarnos en la necesidad y no tanto en la arquitectura del software
+
+* Front Controller
+
+->Es un patrón que nos ayuda a solucionar el problema de acceso único en la web. Este se utiliza para proporcionar un mecanismo centralizado para manejar solicitudes, 
+todas las solicitudes son procesadas por un solo controlador. El controlador puede realizar la autenticación / autorización / registro o solicitud de seguimiento, 
+entonces la petición al controlador adecuado.
+
+->En este caso, vamos a lograr que todos pase a través de index.php, así centralizaremos los accesos. Además, 
+ya no necesitaremos tener un sistema lleno de include para incluir cabeceras o footers.
+
+    📁 Cuando nos referimos a rutas absolutas quiere decir que la ruta comienza en la raíz del directorio.
+
+->Esto es todo lo que contendrá el archivo index. Este va a cargar todo lo necesario, luego va a disponer de la clase Request porque lo registramos en composer, 
+este va a ejecutar el método enviar.
+
+*Ciclo de Petición → Proceso → Respuesta
+
+    ->El sistema arranca en el index.php el cual es la vista de entrada del usuario.
+    ->El usuario comienza una petición y se dispara la clase Request.
+    ->La clase Request ejecuta un controlador y un método del mismo en base a la solicitud del usuario.
+    ->Es método de ese controlador tiene que ser una configuración de la clase Response para servirle al usuario de una vista, array, json o pdf que necesite.

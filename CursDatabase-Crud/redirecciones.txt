@@ -1,0 +1,36 @@
+Redirecciones
+
+La funcién header()
+
+En el modelo cliente/servidor es comin querer enviar informacion extra (autenticacion, control de cookies, control de caché, etc.). Esto lo podemos hacer con la funcion header.
+
+puedes mandar:
+
+    autenticacion
+    control de cookies
+    control de cache
+
+Uno de los headers que podemos mandar son redirects,es decir, el servidor puede responder al navegador Oye, redirige al usuario a esta pagina.
+
+header ("Location: https://platzi.com");
+
+Tambien puedes redirigir a archivos especificos pero ten cuidado de no generar un bucle ten cuidado de hacer esto
+
+//page.php
+header("Location: index.php");
+// index.php
+header("Location: page.php");
+
+Consideraciones
+
+Los encabezados siempre deben ser enviados antes de enviar el cuerpo de la peticion,es decir antes de mandar el contenido.Eso quiere decir que, si imprimes HTML o cualquier otra cosa que genere cuerpo, al intentar redirigir con header obtendras un error.
+
+<aside>
+💡 Recuerda que los encabezados deben ser los primeros en enviarse antes de enviar una respuesta o body
+
+</aside>
+
+<aside>
+💡 Recuerda utlizar la funcion exit() o die al terminar tus headers para que los crawlers se detengan de analizar
+
+</aside>

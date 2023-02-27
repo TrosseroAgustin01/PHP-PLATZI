@@ -1,0 +1,13 @@
+¿Para qué sirven los entornos virtuales?
+
+Muchas veces necesitamos trabajar con distintos proyectos que usan diferentes versiones de PHP. Aunque en algunos sistemas operativos es facil cambiar entre versiones, muchas veces es recomendado utilizar entornos virtuales.
+
+¿Qué es un entorno virtual?
+
+Un entorno virtual nos permite encapsular todo lo necesario para que un proyecto pueda funcionar con las versiones que este mismo requiere. Esto a su vez permite que podamos tener varios proyectos con distintas versiones.
+
+Entornos Virtuales Populares:
+
+    Docker
+    Laragon
+    Vagrant
